@@ -6,14 +6,15 @@ object detection without specifically defining features, and are typically based
 
 ## Running the application
 
+Open up the terminal/CMD in the root directory and execute the following command :
+
 Running in the browser : 
-Open up the terminal/CMD in the root directory and execute command :
 ```
 npm run web
 ```
 
 Running as desktop app : 
-Open up the terminal/CMD in the root directory and execute command :
-```
-npm run desktop
-```
+
+Start the server : ```npm run server```
+
+Launch the desktop app : ```npm run desktop```
