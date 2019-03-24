@@ -4,7 +4,10 @@ The system uses deep learning to identify distractions where deep learning techn
 object detection without specifically defining features, and are typically based on convolutional neural networks
 (CNN). The system further classifies these objects as distractions and alert the user about them.
 
-## Running the application
+Live Link : https://distraction-detector.firebaseapp.com/
+
+
+## Running the application locally
 
 Open up the terminal/CMD in the root directory and execute the following command :
 
