@@ -95,10 +95,7 @@ class App extends React.Component {
           document.querySelector('#dist').innerHTML = `Distractions : ${dist}`;
         }
         if (dist > document.querySelector('#d-thres').value && document.querySelector('#d-thres').value >= 1) {
-
           document.getElementById('notify-audio').play();
-         
-          
         }
       }
     });
