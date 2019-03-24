@@ -1,0 +1,16 @@
+.size {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+html, body {margin: 0; height: 100%; overflow: hidden}
+
+#firebaseui-auth-container{
+  bottom: 0%;
+  position: fixed
+}
+
+#header{
+  position: absolute;
+}

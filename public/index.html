@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC5RYfz1xdJMz-ONOyFzdnHyPb4-VBuVJ8",
+      authDomain: "distraction-detector.firebaseapp.com",
+      databaseURL: "https://distraction-detector.firebaseio.com",
+      projectId: "distraction-detector",
+      storageBucket: "distraction-detector.appspot.com",
+      messagingSenderId: "23402018096"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <title>Distraction Detector</title>
+</head>
+
+<body>
+
+  <div id="header" class="w-100 m-1">
+    <div style="float:left;margin:5px" class="alert alert-danger">
+      Logged in as <span id="username"></span>
+    </div>
+    <button id="logout" style="margin:8px;float: right;" type="button" class="btn btn-danger p-2">Logout</button>
+  </div>
+  <div>
+    <div style="float:left" id="root"></div>
+    <!--Root-->
+    <div style="float:right;width: 50%">
+
+      <div class="form-group p-5 m-4 w-75" style="float:left">
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="person">
+          <label class="custom-control-label" for="person">Person : <span id="d-person">0</span> </label>
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="cell-phone">
+          <label class="custom-control-label" for="cell-phone">Cell phone : <span id="d-cell-phone">0</span> </label>
+
+        </div>
+
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="laptop">
+          <label class="custom-control-label" for="laptop">Laptop : <span id="d-laptop">0</span> </label>
+
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="tv">
+          <label class="custom-control-label" for="tv">TV : <span id="d-dog">0</span> </label>
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="cat">
+          <label class="custom-control-label" for="cat">Cat : <span id="d-cat">0</span> </label>
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="dog">
+          <label class="custom-control-label" for="dog">Dog : <span id="d-dog">0</span> </label>
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="sports-ball">
+          <label class="custom-control-label" for="sports-ball">Sports ball : <span id="d-sports-ball">0</span> </label>
+
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="skateboard">
+          <label class="custom-control-label" for="skateboard">Skateboard : <span id="d-skateboard">0</span> </label>
+
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="cake">
+          <label class="custom-control-label" for="cake">Cake : <span id="d-cake">0</span> </label>
+
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="pizza">
+          <label class="custom-control-label" for="pizza">Pizza : <span id="d-pizza">0</span> </label>
+
+        </div>
+
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="car">
+          <label class="custom-control-label" for="car">Car : <span id="d-car">0</span> </label>
+
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="wine-glass">
+          <label class="custom-control-label" for="wine-glass">Wine Glass : <span id="d-wine-glass">0</span> </label>
+
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="keyboard">
+          <label class="custom-control-label" for="keyboard">Keyboard : <span id="d-keyboard">0</span> </label>
+
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="couch">
+          <label class="custom-control-label" for="couch">Couch : <span id="d-couch">0</span> </label>
+
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="inputDefault">Distraction Threshold</label>
+          <input type="number" class="form-control" placeholder="Enter distraction threshold" id="d-thres">
+        </div>
+
+        <div class="m-2 alert alert-dismissible alert-danger">
+          <div id="dist">Distractions : 0</div>
+        </div>
+        <audio id="notify-audio">
+          <source src="to-the-point.mp3" type="audio/ogg">
+          <source src="to-the-point.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div id="firebaseui-auth-container"></div>
+
+  </div>
+  <script>
+
+  </script>
+  <script>
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-auth-container', {
+      signInSuccessUrl: '/',
+      signInOptions: [
+        // List of OAuth providers supported.
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.GithubAuthProvider.PROVIDER_ID
+      ],
+      tosUrl: '',
+    });
+
+    if (firebase.auth().currentUser == null) {
+      console.log(firebase.auth());
+
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          document.querySelector('#firebaseui-auth-container').hidden=true;
+          document.querySelector('#header').hidden=false;
+          console.log(firebase.auth().currentUser);
+          document.querySelector('#username').innerHTML = firebase.auth().currentUser.displayName;
+
+
+        } else {
+          document.querySelector('#header').hidden=true;        
+          document.querySelector('#firebaseui-auth-container').hidden=false;
+
+        }
+      });
+    }
+
+    document.querySelector('#logout').addEventListener('click',(e)=>{
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          firebase.auth().signOut();
+        } else {
+
+        }
+      
+    })})
+
+  </script>
+</body>
+
+</html>
